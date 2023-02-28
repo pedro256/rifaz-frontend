@@ -1,0 +1,9 @@
+.btnStyle{
+    @apply p-2 px-4 rounded-md font-medium m-0.5;
+    color: black;
+    background-color: aliceblue;
+}
+.btnStylePrimary{
+    background-color: #FFDE59;
+    color: black;
+}

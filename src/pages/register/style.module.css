@@ -1,0 +1,6 @@
+.bg{
+    @apply h-screen bg-primary;
+}
+.card{
+    @apply md:h-screen bg-white m-0.5 rounded-md p-5 md:p-12 w-full md:w-1/2 ;
+}

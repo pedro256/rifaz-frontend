@@ -1,0 +1,7 @@
+.navbarBg{
+    background-color: #FFDE59;
+}
+.ulOptions{
+    @apply md:hidden absolute w-full h-full ;
+    background-color: #FFDE59;
+}

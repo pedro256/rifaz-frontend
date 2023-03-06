@@ -1,6 +1,5 @@
 import { Button } from "@/components/button"
 import { MoneyParserService } from "@/utils/currency-format.service"
-import CurrencyFormat from 'react-currency-format';
 import { RaffleCardBase } from "../base"
 
 
@@ -21,7 +20,10 @@ export function ShowCaseRaffleCard(props: IProps) {
             <div className="md:flex md:justify-between">
                 <div className="mb-4">
                     <h1 className="text-xl font-semibold">{props.title}</h1>
-                    <p className="text-sm">{props.description}</p>
+                    <div className="w-full md:w-60">
+                        <p className="text-sm">{props.description}</p>
+                    </div>
+                    
                 </div>
                 <div className="mb-4">
                     <h2 className="text-lg font-semibold text-stone-800">Prêmios:</h2>

@@ -7,7 +7,7 @@ interface IProps{
 export function RaffleCardBase(props:IProps) {
 
     return (
-        <div className={style.cardBg}>
+        <div className={style.cardRaffle}>
             <div className={style.cardContent}>
                 {props.children}
             </div>

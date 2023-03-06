@@ -1,5 +1,5 @@
-.cardBg{
-    @apply rounded-l-lg pl-8;
+.cardRaffle{
+    @apply rounded-l-lg pl-8 mb-6;
     @apply md:pl-16;
     background-color: #e6e6e6;
 }

@@ -1,0 +1,9 @@
+.cardBg{
+    @apply rounded-l-lg pl-8;
+    @apply md:pl-16;
+    background-color: #e6e6e6;
+}
+.cardContent{
+    @apply border-l-2  p-4 border-dashed ;
+    border-color: gray;
+}

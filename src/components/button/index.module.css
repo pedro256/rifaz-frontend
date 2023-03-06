@@ -4,6 +4,14 @@
     background-color: aliceblue;
 }
 .btnStylePrimary{
+    background-color: #793AFF;
+    color: rgb(248, 248, 248);
+}
+.btnStylePrimaryBlack{
+    background-color: #411E8B;
+    color: rgb(248, 248, 248);
+}
+.btnStyleSecundary{
     background-color: #FFDE59;
     color: black;
 }

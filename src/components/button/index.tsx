@@ -15,6 +15,9 @@ export function Button(props:Props){
             case "primary":
                 stl += style.btnStylePrimary;
                 break;
+            case "primaryBlack":
+                stl += style.btnStylePrimaryBlack;
+                break;
             case "secondary":
                 stl += style.btnStyleSecondary;
                 break;

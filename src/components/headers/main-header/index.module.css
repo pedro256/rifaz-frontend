@@ -1,7 +1,8 @@
 .navbarBg{
-    background-color: #FFDE59;
+    background-color: #793AFF;
+    border-bottom: 2px solid #5b0fff;
 }
 .sideNavBar{
     @apply md:hidden absolute w-full h-full ;
-    background-color: #FFDE59;
+    background-color: #793AFF;
 }

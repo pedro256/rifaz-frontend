@@ -2,6 +2,7 @@ import style from './index.module.css'
 import { AiOutlineMenu, AiOutlineClose,AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react'
 import { Input } from '@/components/input'
+import { Button } from '@/components/button'
 
 interface IItemNav {
     title: string,
@@ -10,7 +11,12 @@ interface IItemNav {
     subNavItem?: Array<IItemNav>
 }
 
-export function MainHeader() {
+interface IProps{
+    search:any
+    setSearch:any
+}
+
+export function MainHeader(props:IProps) {
 
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
     const [selectHeader,setSelectedHeader] = useState<string>("");
@@ -69,7 +75,7 @@ export function MainHeader() {
                             navItem.map(x => (
                                 <li key={x.title} className='font-semibold px-5 group'>
                                     <div>
-                                        <a href={x.url}>{x.title}</a>
+                                        <a className='text-white' href={x.url}>{x.title}</a>
                                         {
                                             x.subNav ? (
                                                 <div className='absolute top-15 hidden group-hover:block hover:block'>
@@ -99,17 +105,17 @@ export function MainHeader() {
 
             </div>
             <div className='flex justify-center'>
-                <div className='py-4 flex items-center'>
-                    <input type="text" />
-                    <AiOutlineSearch></AiOutlineSearch>
-                    <button>Filtro</button>
+                <div className='py-4 flex items-center md:w-1/2'>
+                    <Input value={props.search} setValue={props.setSearch}/>
+                    <AiOutlineSearch size={30} className="text-white mx-4"></AiOutlineSearch>
+                    <Button value="Filtro"/>
                 </div>
             </div>
             <div className={`${style.sideNavBar} duration-500 ${isOpenMenu ? "left-0" : "left-[-100%]"}`}>
                 <ul>
                     {
                         navItem.map(x => (
-                            <li key={x.title} className='font-semibold px-5 py-6'>
+                            <li key={x.title} className='font-semibold text-white px-5 py-6'>
                                 <div>
                                     {
                                         (!x.subNav)?

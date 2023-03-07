@@ -1,6 +1,7 @@
 import { IItemNav, MainHeader } from "@/components/headers/main-header"
 import { useState } from 'react'
 import { ShowCaseRaffleCard } from "@/components/card/raffle/showcase"
+import { Footer } from "@/components/footer";
 
 export default function Home() {
     const [search, setSearch] = useState<string>("");
@@ -78,6 +79,7 @@ export default function Home() {
                 </div>
 
             </section>
+            <Footer/>
         </>
     )
 }

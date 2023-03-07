@@ -26,3 +26,36 @@ a {
   @apply font-bold;
   color: #793AFF;
 }
+
+
+
+.table{
+  @apply w-full p-2 table-auto;
+}
+.table thead{
+  background-color: #a3a1a1;
+}
+.table thead{
+  
+  @apply border;
+  border-color: #a3a1a1;
+}
+
+.table th{
+  @apply pb-2;
+}
+.table td{
+  @apply border;
+  border-color: #c7c7c7;
+}
+.table th{
+  @apply text-center;
+}
+.table td{
+  @apply p-2;
+}
+.table td div{
+  
+  width: max-content;
+  max-width: 300px;
+}

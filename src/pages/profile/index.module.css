@@ -1,0 +1,15 @@
+
+.content{
+    @apply border p-2 m-2 pt-10;
+    @apply md:m-6 md:p-6;
+    border-color: #c7c7c7;
+}
+
+.rowInform{
+    @apply pb-3;
+    @apply block md:flex;
+}
+.titleContent{
+    @apply pl-2 pb-4 text-lg md:text-xl font-bold;
+    color:#383838;
+}

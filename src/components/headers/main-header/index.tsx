@@ -1,58 +1,28 @@
 import style from './index.module.css'
-import { AiOutlineMenu, AiOutlineClose,AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 
-interface IItemNav {
+export interface IItemNav {
     title: string,
     url: string,
     subNav?: boolean,
     subNavItem?: Array<IItemNav>
 }
 
-interface IProps{
-    search:any
-    setSearch:any
+interface IProps {
+    search?: any
+    setSearch?: any,
+    habSearcher?:boolean
+    navItem: Array<IItemNav>
 }
 
-export function MainHeader(props:IProps) {
+export function MainHeader(props: IProps) {
 
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
-    const [selectHeader,setSelectedHeader] = useState<string>("");
-    const navItem: Array<IItemNav> = [
-        {
-            title: "Nova Rifa",
-            url: "rifa/novo",
-        },
-        {
-            title: "Avisos",
-            url: "#"
-        },
-        {
-            title: "Opções",
-            url: "#",
-            subNav: true,
-            subNavItem: [
-                {
-                    title: "Meu Perfil",
-                    url: "profile"
-                },
-                {
-                    title: "Nova Rifa",
-                    url: "rifa/novo"
-                },
-                {
-                    title: "Minhas Rifas",
-                    url: "rifa/my"
-                },
-                {
-                    title: "Rifas Compradas",
-                    url: "rifa/bought"
-                }
-            ]
-        }
-    ]
+    const [selectHeader, setSelectedHeader] = useState<string>("");
+    
 
     return (
         <nav className={style.navbarBg}>
@@ -72,7 +42,7 @@ export function MainHeader(props:IProps) {
                 <div className='pr-10'>
                     <ul className="md:flex hidden gap-8">
                         {
-                            navItem.map(x => (
+                            props.navItem.map(x => (
                                 <li key={x.title} className='font-semibold px-5 group'>
                                     <div>
                                         <a className='text-white' href={x.url}>{x.title}</a>
@@ -104,31 +74,36 @@ export function MainHeader(props:IProps) {
                 </div>
 
             </div>
-            <div className='flex justify-center'>
-                <div className='py-4 flex items-center md:w-1/2'>
-                    <Input value={props.search} setValue={props.setSearch}/>
-                    <AiOutlineSearch size={30} className="text-white mx-4"></AiOutlineSearch>
-                    <Button value="Filtro"/>
-                </div>
-            </div>
+            {
+                props.habSearcher ? (
+                    <div className='flex justify-center'>
+                        <div className='py-4 flex items-center md:w-1/2'>
+                            <Input value={props.search} setValue={props.setSearch} />
+                            <AiOutlineSearch size={30} className="text-white mx-4"></AiOutlineSearch>
+                            <Button value="Filtro" />
+                        </div>
+                    </div>
+                ) : null
+            }
+
             <div className={`${style.sideNavBar} duration-500 ${isOpenMenu ? "left-0" : "left-[-100%]"}`}>
                 <ul>
                     {
-                        navItem.map(x => (
+                        props.navItem.map(x => (
                             <li key={x.title} className='font-semibold text-white px-5 py-6'>
                                 <div>
                                     {
-                                        (!x.subNav)?
-                                        (<a href={x.url}> {x.title}</a>):
-                                        (<h3 onClick={e => selectHeader==x.title?setSelectedHeader("") :setSelectedHeader(x.title)}>{x.title}</h3>)
+                                        (!x.subNav) ?
+                                            (<a href={x.url}> {x.title}</a>) :
+                                            (<h3 onClick={e => selectHeader == x.title ? setSelectedHeader("") : setSelectedHeader(x.title)}>{x.title}</h3>)
                                     }
                                     {
                                         <div className={
-                                            `${selectHeader === x.title? 'block':'hidden'} bg-white px-2 py-4 rounded-sm`
+                                            `${selectHeader === x.title ? 'block' : 'hidden'} bg-white px-2 py-4 rounded-sm`
                                         }>
                                             {
                                                 x.subNavItem?.map(
-                                                    sub =>(
+                                                    sub => (
                                                         <div key={sub.title}>
                                                             <a href={sub.url}>{sub.title}</a>
                                                         </div>
@@ -137,7 +112,7 @@ export function MainHeader(props:IProps) {
                                             }
 
                                         </div>
-                                        
+
                                     }
                                 </div>
                             </li>

@@ -1,0 +1,9 @@
+.inputStyle{
+    @apply p-1.5 m-1.5 rounded-sm w-full;
+    border: 1px solid #c4c4c4;
+}
+.inputStyle:focus { 
+    outline: none !important;
+    border-bottom: 1px solid #111;
+
+}

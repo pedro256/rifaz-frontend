@@ -8,11 +8,19 @@ interface Props{
     placeholder?:string,
     value:any,
     setValue:any,
-    type?:HTMLInputTypeAttribute
+    type?:HTMLInputTypeAttribute,
+    onChangeValue?:Function
 
 }
 export function Input(props:Props){
 
+    const onChange =(v:any)=>{
+        props.setValue(v);
+        if(props.onChangeValue){
+            props.onChangeValue();
+        }
+        
+    }
     return (
         <input
         className={style.inputStyle}
@@ -21,7 +29,7 @@ export function Input(props:Props){
         type={props.type || "text"}
         placeholder={props.placeholder || "..."}
         value={props.value}
-        onChange={(e)=>{props.setValue(e.target.value)}}
+        onChange={(e)=>{onChange(e.target.value)}}
         >
         </input>
     )

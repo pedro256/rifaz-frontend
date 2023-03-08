@@ -1,0 +1,4 @@
+.selectStyle{
+    @apply w-full p-1.5 m-1.5 rounded-sm;
+    border: 1px solid #c4c4c4;
+}

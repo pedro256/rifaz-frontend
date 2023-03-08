@@ -27,6 +27,11 @@ a {
   color: #793AFF;
 }
 
+label{
+  @apply p-1 font-bold;
+  font-size: medium;
+  color:#424242;
+}
 
 
 .table{

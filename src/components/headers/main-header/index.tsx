@@ -28,7 +28,7 @@ export function MainHeader(props: IProps) {
         <nav className={style.navbarBg}>
             <div className="flex justify-between px-6 pt-4">
                 <div className='w-full md:w-auto flex justify-between'>
-                    <img src="favico.svg" alt="logo" className="w-12" />
+                    <img src="/favico.svg" alt="logo" className="w-12" />
                     <div className='md:hidden' onClick={() => setIsOpenMenu(!isOpenMenu)}>
                         {
                             isOpenMenu ?

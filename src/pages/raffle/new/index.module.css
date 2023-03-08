@@ -1,0 +1,8 @@
+.card{
+    @apply border p-10 rounded-t-xl;
+    border-color: #c7c7c7;
+}
+.content{
+    @apply border-t-2 border-dashed;
+    border-color: gray;
+}

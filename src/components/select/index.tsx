@@ -2,6 +2,7 @@
 import style from './index.module.css';
 
 export interface IOption{
+    id?:string
     value:string,
     label:string
 }
@@ -27,8 +28,8 @@ export function Select(props:Props){
         >
             <option value={props.defaultValue || "0"} label={props.defaultText || "Selecione Algum Item !"} />
             {
-                props.options.map(o =>(
-                    <option value={o.value} label={o.label} />
+                props.options.map((o,index) =>(
+                    <option key={index+1} value={o.value} label={o.label} />
                 ))
             }
         </select>

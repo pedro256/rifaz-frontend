@@ -8,7 +8,8 @@ interface IProps {
     description: string,
     prizesDescription?: Array<string>,
     value: number,
-
+    acquired:number,
+    amount:number,
 }
 
 export function ShowCaseRaffleCard(props: IProps) {

@@ -1,43 +1,12 @@
-import { IItemNav, MainHeader } from "@/components/headers/main-header"
+import { MainHeader } from "@/components/headers/main-header"
 import { useState } from 'react'
 import { ShowCaseRaffleCard } from "@/components/card/raffle/showcase"
 import { Footer } from "@/components/footer";
+import { HomePageNavItem } from "@/components/headers/nav-items/navItem";
 
 export default function Home() {
     const [search, setSearch] = useState<string>("");
-    const navItem: Array<IItemNav> = [
-        {
-            title: "Nova Rifa",
-            url: "rifa/novo",
-        },
-        {
-            title: "Avisos",
-            url: "#"
-        },
-        {
-            title: "Opções",
-            url: "#",
-            subNav: true,
-            subNavItem: [
-                {
-                    title: "Meu Perfil",
-                    url: "profile"
-                },
-                {
-                    title: "Nova Rifa",
-                    url: "rifa/novo"
-                },
-                {
-                    title: "Minhas Rifas",
-                    url: "rifa/my"
-                },
-                {
-                    title: "Rifas Compradas",
-                    url: "rifa/bought"
-                }
-            ]
-        }
-    ];
+ 
 
     return (
         <>
@@ -45,7 +14,7 @@ export default function Home() {
             habSearcher={true}
             search={search} 
             setSearch={setSearch}
-            navItem={navItem}
+            navItem={HomePageNavItem}
             ></MainHeader>
             <section>
                 <div className="flex justify-center">
@@ -64,6 +33,8 @@ export default function Home() {
                                 "Outro"
                             ]}
                             value={23.3442}
+                            acquired={10}
+                            amount={1828}
                         />
 
                         <ShowCaseRaffleCard
@@ -74,6 +45,9 @@ export default function Home() {
                                 "Outro"
                             ]}
                             value={23.3442}
+                            
+                            acquired={10}
+                            amount={1828}
                         />
                     </div>
                 </div>

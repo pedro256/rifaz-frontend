@@ -3,13 +3,9 @@ import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
+import Link from 'next/link'
+import { IItemNav } from '../nav-items/navItem'
 
-export interface IItemNav {
-    title: string,
-    url: string,
-    subNav?: boolean,
-    subNavItem?: Array<IItemNav>
-}
 
 interface IProps {
     search?: any
@@ -54,7 +50,8 @@ export function MainHeader(props: IProps) {
                                                             {
                                                                 x.subNavItem?.map(sub => (
                                                                     <div key={sub.title} className='text-sm text-gray-600 my-2'>
-                                                                        <a className='hover:text-secundary' href={sub.url}>{sub.title}</a>
+                                                                        <Link className='hover:text-secundary' href={sub.url}> {sub.title}</Link>
+
                                                                     </div>
                                                                 ))
                                                             }

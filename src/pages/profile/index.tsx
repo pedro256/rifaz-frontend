@@ -1,25 +1,16 @@
-import { IItemNav, MainHeader } from "@/components/headers/main-header";
+import { MainHeader } from "@/components/headers/main-header";
+import {SecundaryPageNavItem} from '@/components/headers/nav-items/navItem'
 import { MdAttachMoney } from 'react-icons/md'
 import style from './index.module.css'
 
 
 export default function Profile() {
 
-    const navItem: Array<IItemNav> = [
-        {
-            title: "Principal",
-            url: "/home",
-        },
-        {
-            title: "Avisos",
-            url: "#"
-        }
-    ]
 
     return (
         <>
             <MainHeader
-                navItem={navItem}
+                navItem={SecundaryPageNavItem}
             ></MainHeader>
             <div>
                 <div className={style.content}>

@@ -5,6 +5,7 @@ import style from './index.module.css';
 import styleBase from '../base/style.module.css'
 import { useMemo } from "react";
 import RaffleStatusEnum from "@/shared/models/enum/RaffleStatusEnum";
+import { MoneyParserService } from "@/shared/utils/currency-format.service";
 
 
 interface IProps {
@@ -22,7 +23,7 @@ interface IProps {
 
 export function MyRaffleCard(props: IProps) {
 
-    //const moneyParserService = new MoneyParserService();
+    const moneyParserService = new MoneyParserService();
     
     const getFormatedDate = (): string => {
         return moment(props.drawDate).format("DD/MM/YYYY") + " ás " + moment(props.drawDate).format("HH:mm")
@@ -33,10 +34,7 @@ export function MyRaffleCard(props: IProps) {
     }, [props.drawDate]);
 
     const howMuchTime = () => {
-        //props.drawDate.setHours(9);
         let agora = new Date();
-        console.log("agora", agora);
-        console.log("sorteio as ", props.drawDate)
         if (memorizedIsCurrentDay) {
 
             var ms = moment(props.drawDate, "DD/MM/YYYY HH:mm:ss").diff(moment(agora, "DD/MM/YYYY HH:mm:ss"));
@@ -52,6 +50,8 @@ export function MyRaffleCard(props: IProps) {
             var s = Math.floor(horas) + "h" + minutosStr + "m";
 
             return "Faltam " + s + " (aproximadamente)";
+        }else if(agora > props.drawDate){
+            return ""
         }
         return "Ainda não é dia !"
     }
@@ -89,34 +89,39 @@ export function MyRaffleCard(props: IProps) {
                         </p>
                         <span>{getStatus(props.status)}</span>
                     </div>
-                    <div>
+                </div>
+                <div className="mb-4">
+                    
+                <div>
                         <div className="flex items-center">
                             <div className="w-40">
                                 <p>
-                                    Rifas Vendidas:
+                                    Vendidas:
                                 </p>
 
                             </div>
                             <div>
-                                R$ 100,90
+                                <p className="font-bold text-lg">
+                                    {moneyParserService.TextToFormatedMoney(props.totalValue)}
+                                </p>
                             </div>
 
                         </div>
                         <div className="flex items-center">
                             <div className="w-40">
                                 <p>
-                                    Valor da Rifas:
+                                    Valor:
                                 </p>
 
                             </div>
                             <div>
-                                R$ 00,90
+                                <p className="font-bold text-lg">
+                                    {moneyParserService.TextToFormatedMoney(props.unitValue)}
+                                </p>
                             </div>
 
                         </div>
                     </div>
-
-
                 </div>
                 <div className="mb-4 text-center">
                     <div>

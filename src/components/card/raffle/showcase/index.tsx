@@ -1,5 +1,5 @@
 import { Button } from "@/components/button"
-import { MoneyParserService } from "@/utils/currency-format.service"
+import { MoneyParserService } from "@/shared/utils/currency-format.service"
 import { RaffleCardBase } from "../base"
 
 

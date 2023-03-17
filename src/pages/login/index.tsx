@@ -2,11 +2,24 @@ import styles from './style.module.css'
 import { Input } from '@/components/input'
 import { useState } from 'react'
 import { Button } from '@/components/button';
+import axios from 'axios';
+import { IAuthModel } from '@/shared/models/dto/IAuthModel';
 
 export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const onClickAuth = ()=>{
+    const data:IAuthModel = {
+      username:email,
+      password:password
+    }
+    
+    axios.post("/api/auth",data).then((response)=>{
+      console.log("authenticação ...",response)
+    })
+  }
 
   return (
     <div className={styles.bglogin}>
@@ -40,7 +53,7 @@ export default function Login() {
             </div>
           </div>
 
-          <Button value="Prosseguir" type="primary" />
+          <Button onClick={onClickAuth} value="Prosseguir" type="primary" />
 
           <div className='grid justify-items-end w-3/4'>
             <div>
@@ -58,3 +71,8 @@ export default function Login() {
     </div>
   )
 }
+
+
+// export function getServerSideProps(){
+//   return ;
+// }

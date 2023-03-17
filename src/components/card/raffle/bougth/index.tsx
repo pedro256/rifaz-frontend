@@ -1,12 +1,6 @@
-import { Button } from "@/components/button"
-import moment from "moment";
-import { RaffleCardBase } from "../base"
-import style from './index.module.css';
-import styleBase from '../base/style.module.css'
-import { useMemo } from "react";
 import RaffleStatusEnum from "@/shared/models/enum/RaffleStatusEnum";
-import { MoneyParserService } from "@/shared/utils/currency-format.service";
 import { TimeFormatService } from "@/shared/utils/time-format.service";
+import { RaffleCardBase } from "../base";
 
 
 interface IProps {
@@ -16,62 +10,18 @@ interface IProps {
     drawDate: Date,
     prizesDescription?: Array<string>,
     unitValue: number,
-    totalValue: number,
     acquired: number,
-    amount: number,
     status: RaffleStatusEnum
 }
 
-export function MyRaffleCard(props: IProps) {
+export function BougthRaffleCard(props: IProps) {
 
-    const moneyParserService = new MoneyParserService();
     const timeFormatService = new TimeFormatService();
-    
-    const getFormatedDate = (): string => {
-        return timeFormatService.DateTimeToFormatedText(props.drawDate)
+
+    const getFormatedDate = ()=>{
+        return timeFormatService.DateTimeToFormatedText(props.drawDate);
     }
-    const memorizedIsCurrentDay = useMemo((): boolean => {
-        const isDay = (moment(props.drawDate).format("DD/MM/YYYY") == moment(new Date()).format("DD/MM/YYYY"));
-        return isDay;
-    }, [props.drawDate]);
-
-    const howMuchTime = () => {
-        let agora = new Date();
-        if (memorizedIsCurrentDay) {
-
-            var ms = moment(props.drawDate, "DD/MM/YYYY HH:mm:ss").diff(moment(agora, "DD/MM/YYYY HH:mm:ss"));
-
-            var horas = moment.duration(ms).asHours();
-            var minutosStr = moment.utc(ms).format("mm");
-            if (Math.floor(horas) == 0) {
-                if (minutosStr != "00") {
-                    return minutosStr + " minutos (aproximadamente)";
-                }
-                return "Agora !"
-            }
-            var s = Math.floor(horas) + "h" + minutosStr + "m";
-
-            return "Faltam " + s + " (aproximadamente)";
-        }else if(agora > props.drawDate){
-            return ""
-        }
-        return "Ainda não é dia !"
-    }
-
-    const getStatus = (status:number = 0)=>{
-        switch(status){
-            case RaffleStatusEnum.ACTIVE:
-                return (<p className={styleBase.textSttActive}>Ativo</p>);
-            case RaffleStatusEnum.CANCELED:
-                return (<p className={styleBase.textSttCanceled}>Cancelado</p>);
-            case RaffleStatusEnum.FINISHED:
-                return (<p className={styleBase.textSttFinished}>Finalizado</p>)
-            default:
-                return(<div>...</div>)
-        }
-    }
-
-    return (
+    return(
         <RaffleCardBase>
             <div className="md:flex md:justify-between">
                 <div className="mb-4">
@@ -81,7 +31,7 @@ export function MyRaffleCard(props: IProps) {
                     </div>
                     <div className="mt-5">
                         <p className="font-semibold">Data de Sorteio: {getFormatedDate()}</p>
-                        <small className="italic font-bold">{howMuchTime()}</small>
+                        {/* <small className="italic font-bold">{howMuchTime()}</small> */}
                     </div>
                     <div className="flex mt-5">
                         <p className="w-20">

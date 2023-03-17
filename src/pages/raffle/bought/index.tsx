@@ -15,6 +15,7 @@ export default function BougthRaffle() {
 
 
                         <BougthRaffleCard
+                        totalValue={1092}
                         status={1}
                         title="Teste"
                         description="teste descriotop"

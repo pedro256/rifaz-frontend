@@ -1,7 +1,9 @@
 import RaffleStatusEnum from "@/shared/models/enum/RaffleStatusEnum";
+import { MoneyParserService } from "@/shared/utils/currency-format.service";
 import { TimeFormatService } from "@/shared/utils/time-format.service";
 import { RaffleCardBase } from "../base";
-
+import styleBase from '../base/style.module.css'
+import { Button } from "@/components/button";
 
 interface IProps {
     id: number,
@@ -10,6 +12,7 @@ interface IProps {
     drawDate: Date,
     prizesDescription?: Array<string>,
     unitValue: number,
+    totalValue:number
     acquired: number,
     status: RaffleStatusEnum
 }
@@ -17,11 +20,24 @@ interface IProps {
 export function BougthRaffleCard(props: IProps) {
 
     const timeFormatService = new TimeFormatService();
+    const moneyParserService = new MoneyParserService();
 
-    const getFormatedDate = ()=>{
+    const getFormatedDate = () => {
         return timeFormatService.DateTimeToFormatedText(props.drawDate);
     }
-    return(
+    const getStatus = (status: number = 0) => {
+        switch (status) {
+            case RaffleStatusEnum.ACTIVE:
+                return (<p className={styleBase.textSttActive}>Ativo</p>);
+            case RaffleStatusEnum.CANCELED:
+                return (<p className={styleBase.textSttCanceled}>Cancelado</p>);
+            case RaffleStatusEnum.FINISHED:
+                return (<p className={styleBase.textSttFinished}>Finalizado</p>)
+            default:
+                return (<div>...</div>)
+        }
+    }
+    return (
         <RaffleCardBase>
             <div className="md:flex md:justify-between">
                 <div className="mb-4">
@@ -43,23 +59,10 @@ export function BougthRaffleCard(props: IProps) {
                     </div>
                 </div>
                 <div className="mb-4">
-                    
-                <div>
-                        <div className="flex items-center">
-                            <div className="w-40">
-                                <p>
-                                    Vendidas:
-                                </p>
 
-                            </div>
-                            <div>
-                                <p className="font-bold text-lg">
-                                    {moneyParserService.TextToFormatedMoney(props.totalValue)}
-                                </p>
-                            </div>
-
-                        </div>
-                        <div className="flex items-center">
+                    <div>
+                        
+                    <div className="flex items-center">
                             <div className="w-40">
                                 <p>
                                     Valor:
@@ -73,32 +76,37 @@ export function BougthRaffleCard(props: IProps) {
                             </div>
 
                         </div>
+                        <div className="flex items-center">
+                            <div className="w-40">
+                                <p>
+                                    Total:
+                                </p>
+
+                            </div>
+                            <div>
+                                <p className="font-bold text-lg">
+                                    {moneyParserService.TextToFormatedMoney(props.totalValue)}
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-                <div className="mb-4 text-center">
+                <div className="mb-4 text-center p-2">
                     <div>
-                        <p className="text-xl">10/100</p>
-                        <p className="text-xs">vendidas/disponiveis</p>
+                        <p className="text-xl">{props.acquired}</p>
+                        <p className="text-xs">compradas</p>
                     </div>
-                    <div>
-                        <Button value="detalhes" type="blank" />
-                    </div>
-
 
                 </div>
             </div>
             <div>
                 <div className="flex justify-between">
                     <div className="flex items-center">
-                        <Button value="Editar" type="black" />
+                        <Button value="Mais Detalhes"  />
                     </div>
                     <div>
-                        <button
-                            className={style.btnCardSort}
-                            type="button"
-                        >
-                            Sortear
-                        </button>
+                        <Button value="Resultado" type="primary"/>
                     </div>
 
                 </div>

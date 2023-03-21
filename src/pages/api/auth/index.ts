@@ -15,11 +15,17 @@ export default async function handler(
             username:req.body.username,
             password:req.body.password
         }
-        console.log(data)
-        axios.post(env.backendUrl+"/auth",data).then((resp)=>{
-            console.log("resp",resp)
-            res.status(200).json(resp.data)
-        })
+
+        axios.post(env.backendUrl+"/auth",data).then(
+          ({data})=>{
+            console.log("token",data.token)
+            res.status(200).json(data)
+          },
+          (err)=>{
+            console.log("error",err)
+            res.status(400).json({ok:false})
+          }
+          )
        
     }
 }

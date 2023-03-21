@@ -1,14 +1,20 @@
 import styles from './style.module.css'
 import { Input } from '@/components/input'
-import { useState } from 'react'
+import { useState, useContext} from 'react'
 import { Button } from '@/components/button';
 import axios from 'axios';
 import { IAuthModel } from '@/shared/models/dto/IAuthModel';
+import { GlobalContext } from '@/shared/context/globalContext';
 
 export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  
+  const { getAccessToken } = useContext(GlobalContext);
+
+  console.log("token",getAccessToken())
 
   const onClickAuth = ()=>{
     const data:IAuthModel = {

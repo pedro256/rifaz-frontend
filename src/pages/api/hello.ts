@@ -10,6 +10,5 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const response = await GetApiClient(req).get("user")
-  console.log(response.data)
   res.status(200).json({ name: 'John Doe' })
 }

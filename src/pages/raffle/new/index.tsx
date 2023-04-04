@@ -69,7 +69,6 @@ export default function NewRaffle() {
     }
 
     const validForm = ()=>{
-        console.log(prizes)
         alert("Formulario")
     }
 

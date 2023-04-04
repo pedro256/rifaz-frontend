@@ -1,15 +1,26 @@
 import { MainHeader } from "@/components/headers/main-header"
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { ShowCaseRaffleCard } from "@/components/card/raffle/showcase"
 import { Footer } from "@/components/footer";
 import { HomePageNavItem } from "@/components/headers/nav-items/navItem";
 import { GetServerSideProps } from "next";
 import { GetApiClient } from "@/services/api/api.service";
 import { parseCookies } from "nookies";
+import { IRaffleModel } from "@/shared/models/dto/RaffleModel";
 
-export default function Home() {
+type Props = {
+    raffles:Array<IRaffleModel>
+}
+
+export default function Home({raffles}:Props) {
     const [search, setSearch] = useState<string>("");
- 
+
+    const [raffleList,setRaffleList] = useState<IRaffleModel[]>(raffles);
+
+    useEffect(()=>{
+        console.log("raffle",raffleList)
+    },[])
+    
 
     return (
         <>
@@ -62,7 +73,7 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    //const apiClient = GetApiClient(ctx);
+    const apiClient = GetApiClient(ctx);
     const { ['nextauth.token']: token } = parseCookies(ctx)
   
     if (!token) {
@@ -74,9 +85,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       }
     }
   
-    //await apiClient.get('/users')
-  
+    const raffles = await apiClient.get('/raffle');
     return {
-      props: {}
+      props: {
+        raffles:raffles.data
+      }
     }
   }

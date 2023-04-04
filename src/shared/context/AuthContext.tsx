@@ -73,7 +73,6 @@ export function AuthContextProvider({ children }: Props) {
             }
             
         } catch (error) {
-            console.error("auth",error)
             return {
                 ok:false,
                 description:error

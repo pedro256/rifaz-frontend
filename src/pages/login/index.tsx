@@ -2,29 +2,28 @@ import styles from './style.module.css'
 import { Input } from '@/components/input'
 import { useState, useContext} from 'react'
 import { Button } from '@/components/button';
+import Router from 'next/router';
+import { getSession,signIn } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { AuthContext } from '@/shared/context/AuthContext';
 import axios from 'axios';
-import { IAuthModel } from '@/shared/models/dto/IAuthModel';
-import { GlobalContext } from '@/shared/context/globalContext';
+import { parseCookies } from 'nookies';
+//import { GlobalContext } from '@/shared/context/globalContext';
 
 export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {signIn} = useContext(AuthContext)
 
-  
-  const { getAccessToken } = useContext(GlobalContext);
-
-  console.log("token",getAccessToken())
-
-  const onClickAuth = ()=>{
-    const data:IAuthModel = {
-      username:email,
-      password:password
+  const onClickAuth = async()=>{
+    const response = await signIn({username:email,password});
+    if(response.ok){
+      //axios.get("api/hello")
+      Router.push("/")
+    }else{
+      alert(response.message)
     }
-    
-    axios.post("/api/auth",data).then((response)=>{
-      console.log("authenticação ...",response)
-    })
   }
 
   return (
@@ -79,6 +78,22 @@ export default function Login() {
 }
 
 
-// export function getServerSideProps(){
-//   return ;
-// }
+export  const getServerSideProps:GetServerSideProps = async(context)=>{
+
+
+  // const { ['nextauth.token']: token } = parseCookies(context)
+  // if (token) {
+  //   return {
+  //     redirect: {
+  //       destination: '/home',
+  //       permanent: false,
+  //     }
+  //   }
+  // }
+
+   return {
+    props:{
+      
+    }
+   };
+}

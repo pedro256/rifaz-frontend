@@ -1,5 +1,7 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { parseCookies } from 'nookies'
 
 export default function Home() {
   return (
@@ -22,4 +24,26 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  //const apiClient = GetApiClient(ctx);
+  const { ['nextauth.token']: token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    redirect: {
+      destination: '/home',
+      permanent: false,
+    }
+  }
 }

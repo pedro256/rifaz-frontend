@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { ShowCaseRaffleCard } from "@/components/card/raffle/showcase"
 import { Footer } from "@/components/footer";
 import { HomePageNavItem } from "@/components/headers/nav-items/navItem";
+import { GetServerSideProps } from "next";
+import { GetApiClient } from "@/services/api/api.service";
+import { parseCookies } from "nookies";
 
 export default function Home() {
     const [search, setSearch] = useState<string>("");
@@ -57,3 +60,23 @@ export default function Home() {
         </>
     )
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    //const apiClient = GetApiClient(ctx);
+    const { ['nextauth.token']: token } = parseCookies(ctx)
+  
+    if (!token) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        }
+      }
+    }
+  
+    //await apiClient.get('/users')
+  
+    return {
+      props: {}
+    }
+  }
